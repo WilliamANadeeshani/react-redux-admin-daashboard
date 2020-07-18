@@ -53,3 +53,43 @@ export const fetchChapters = () => {
             )
     }
 };
+
+export const fetchUsers = () => {
+    return dispatch => {
+        userService.getUsers()
+            .then(
+                data => {
+                    dispatch({
+                        type: actionTypes.USERS_FETCH_SUCCESS,
+                        payload: data
+                    })
+                },
+                error => {
+                    dispatch({
+                        type: actionTypes.CHAPTERS_FETCH_FAILURE,
+                        payload: error
+                    })
+                }
+            )
+    }
+}
+
+export const updateCredits = (user, amount) => {
+    return dispatch => {
+        userService.updateCredits(user, amount)
+            .then(
+                data => {
+                    dispatch({
+                        type: actionTypes.UPDATE_CREDIT_SUCCESS,
+                        payload: data
+                    })
+                },
+                error => {
+                    dispatch({
+                        type: actionTypes.UPDATE_CREDIT_FAILURE,
+                        payload: error
+                    })
+                }
+            )
+    }
+}

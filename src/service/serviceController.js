@@ -23,15 +23,15 @@ export const getChapterComposer = (text) => {
         }
 
 
-        let composeLessons = function(lessonArr){
+        let composeLessons = function (lessonArr) {
             const array = [];
             _.forEach(lessonArr, function (o) {
                 let obj = {
                     number: o.number,
-                    name : o.name,
-                    description : o.description,
-                    cost : o.cost,
-                    active : o.active,
+                    name: o.name,
+                    description: o.description,
+                    cost: o.cost,
+                    active: o.active,
                     link: o.link
                 };
                 array.push(obj);
@@ -44,12 +44,12 @@ export const getChapterComposer = (text) => {
         _.forEach(JSON.parse(res), (o) => {
             let obj = {
                 id: o._id,
-                chapterNumber : o.chapterNumber,
-                chapterName : o.chapterName,
-                chapterCost : o.chapterCost,
-                chapterDescription : o.chapterDescription,
-                chapterPreviewLink : "https://www.youtube.com/embed/" + o.chapterPreviewLink.split('=')[1],
-                lessons : composeLessons(o.lessons)
+                chapterNumber: o.chapterNumber,
+                chapterName: o.chapterName,
+                chapterCost: o.chapterCost,
+                chapterDescription: o.chapterDescription,
+                chapterPreviewLink: "https://www.youtube.com/embed/" + o.chapterPreviewLink.split('=')[1],
+                lessons: composeLessons(o.lessons)
             };
             chapters.push(obj);
         });
@@ -57,3 +57,41 @@ export const getChapterComposer = (text) => {
         return Promise.resolve(chapters);
     });
 };
+
+export const getUserComposer = (text) => {
+    return text.text().then(res => {
+        if (!text.ok) {
+            if (text.status === 400) {
+                return Promise.reject(res);
+            }
+            return Promise.reject(res);
+        }
+
+        let arr = [];
+        _.forEach(JSON.parse(res), function (o) {
+            let obj = {
+                id: o._id,
+                name: o.name,
+                email: o.email,
+                creditBalance: o.creditBalance,
+                pendingCredits: o.pendingCredits,
+                subscribedChapters: o.subscribedChapters,
+                userID: o.userID
+            };
+            arr.push(obj);
+        });
+        return Promise.resolve(arr);
+    });
+}
+
+export const updateCreditComposer = (text) => {
+    return text.text().then(res => {
+        if (!text.ok) {
+            if (text.status === 400) {
+                return Promise.reject(res);
+            }
+            return Promise.reject(res);
+        }
+        return Promise.resolve(JSON.parse(res));
+    });
+}

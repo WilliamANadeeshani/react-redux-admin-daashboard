@@ -45,7 +45,7 @@ class LoginPage extends React.Component {
             <Container maxWidth="sm" className={this.props.componentStyle}>
                 <Grid container alignItems="center" spacing={3}>
                     <Grid item xs={12}>
-                        <TextField required label="Email" onChange={this.emailChangeHandler} value={this.state.email}/>
+                        <TextField required label="Email" type="email" onChange={this.emailChangeHandler} value={this.state.email}/>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField required label="Password" type="password" onChange={this.passwordChangeHandler}/>
