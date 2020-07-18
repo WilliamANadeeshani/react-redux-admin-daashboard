@@ -1,23 +1,40 @@
 import {SERVICE_ROOT} from './serviceConstants';
-import {controllers} from './serviceController'
+import {loginResponseController, getChapterComposer} from './serviceController'
 
-function loginService(email, password) {
+const BEARER_TOKEN = sessionStorage.getItem('token');
+
+let loginService = (email, password) => {
+    const URL = SERVICE_ROOT + "users/login";
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({email, password})
     };
 
-    const URL = SERVICE_ROOT + "users/login";
     return fetch(URL, requestOptions)
-        .then(controllers.loginResponseController)
+        .then(loginResponseController)
         .then(data => {
-            sessionStorage.setItem('token', data.token);
+            sessionStorage.setItem('token', "Bearer " + data.token);
             sessionStorage.setItem('email', data.email);
             return data.email;
         })
-}
+};
+
+let getChapters = () => {
+    const URL = SERVICE_ROOT + "chapters";
+    const requestOptions = {
+        method: 'GET',
+        headers: {'Authorization': BEARER_TOKEN}
+    };
+
+    return fetch(URL, requestOptions)
+        .then(getChapterComposer)
+        .then(data => {
+            return data;
+        })
+};
 
 export const userService = {
-    loginService
-}
+    loginService,
+    getChapters
+};

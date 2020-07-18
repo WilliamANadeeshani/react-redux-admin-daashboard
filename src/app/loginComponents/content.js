@@ -1,15 +1,15 @@
 import React from 'react';
 import Header from "./header";
 import LoginPage from './loginPage';
-import useStyles from './../css/useStyles'
+import useStyles from '../../css/useStyles'
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/styles';
 
-import {login} from './../store/actions/actionCreators'
-import HomePage from "./homePage";
+import {login} from '../../store/actions/actionCreators'
+import HomePage from "../dashboardComponents/content";
 
-class AdminDashBoard extends React.Component {
+class Content extends React.Component {
 
     render() {
         const {classes} = this.props;
@@ -29,7 +29,7 @@ class AdminDashBoard extends React.Component {
     }
 }
 
-AdminDashBoard.propTypes = {
+Content.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
@@ -39,10 +39,10 @@ const mapStateToProps = (appState) => {
     return {
         loggedIn: appState.isValidUser
     }
-}
+};
 
 const mapDispatchToProps = {
     login: login
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AdminDashBoard));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Content));

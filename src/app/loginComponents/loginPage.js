@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 
-import {login} from './../store/actions/actionCreators'
+import {login} from '../../store/actions/actionCreators'
 import Grid from "@material-ui/core/Grid";
 
 
@@ -25,20 +25,20 @@ class LoginPage extends React.Component {
         this.setState({
             email : event.target.value
         })
-    }
+    };
 
     passwordChangeHandler = (event) => {
         this.setState({
             password: event.target.value
         })
-    }
+    };
 
     onSubmit = () => {
         this.setState({
             isSubmit: true
-        })
+        });
         this.props.login(this.state.email, this.state.password);
-    }
+    };
 
     render() {
         return (
@@ -64,11 +64,11 @@ const mapStateToProps = (appState) => {
     return {
         isValidUser: appState.isValidUser
     }
-}
+};
 
 //can use as  --> this.props
 const mapDispatchToProps = {
     login: login
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

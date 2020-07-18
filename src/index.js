@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import AdminDashboard from './app/adminDashboard'
+import AdminDashboard from './app/loginComponents/content'
 import { Provider } from 'react-redux'
 import store from './store/store'
 

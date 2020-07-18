@@ -19,4 +19,9 @@ export const styles = (theme) => ({
     button: {
         borderColor: lightColor,
     },
+
+    toolbar: {
+        minHeight: '46px',
+        marginTop: "20px"
+    }
 });
