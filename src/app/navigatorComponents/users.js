@@ -20,6 +20,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Backdrop from "@material-ui/core/Backdrop";
 
 
 class Users extends React.Component {
@@ -37,13 +39,13 @@ class Users extends React.Component {
         this.props.fetch_users();
     }
 
-    onUpdateCreditDialogOpen = (user) =>{
+    onUpdateCreditDialogOpen = (user) => {
         this.setState({
             open: true,
             currentUser: user,
         });
 
-    }
+    };
 
     handleClose = () => {
         this.setState({
@@ -63,10 +65,10 @@ class Users extends React.Component {
         this.setState({
             creditUpdateAmount: e.target.value
         })
-    }
+    };
 
     render() {
-        const {classes, users} = this.props;
+        const {classes, users, loading, loadingChapterUpdate} = this.props;
         return (
             <React.Fragment>
                 <List subheader={<ListSubheader>User Credits</ListSubheader>} className={classes.root}>
@@ -92,7 +94,9 @@ class Users extends React.Component {
 
                                 </Grid>
                                 <ListItemSecondaryAction>
-                                    <Button variant="outlined" color="primary" onClick={() => {this.onUpdateCreditDialogOpen(user)}}>
+                                    <Button variant="outlined" color="primary" onClick={() => {
+                                        this.onUpdateCreditDialogOpen(user)
+                                    }}>
                                         Update Credits
                                     </Button>
                                 </ListItemSecondaryAction>
@@ -103,7 +107,8 @@ class Users extends React.Component {
 
                 <div>
                     <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Update {this.state.currentUser.name}'s Credit Balance</DialogTitle>
+                        <DialogTitle id="form-dialog-title">Update {this.state.currentUser.name}'s Credit
+                            Balance</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
                                 To update user credits, please enter added new amount here.
@@ -115,7 +120,7 @@ class Users extends React.Component {
                                        required
                                        variant="outlined"
                                        label="Update By"
-                                       defaultValue= {0}
+                                       defaultValue={0}
                                        min={0}
                                        onChange={this.handleCreditFieldChange}
                                        InputProps={{
@@ -135,6 +140,9 @@ class Users extends React.Component {
                         </DialogActions>
                     </Dialog>
                 </div>
+                <Backdrop open={loading || loadingChapterUpdate} style={{zIndex: 1, color: '#fff'}}>
+                    <CircularProgress color="inherit"/>
+                </Backdrop>
             </React.Fragment>
         )
     }
@@ -143,7 +151,8 @@ class Users extends React.Component {
 const mapStateToProps = (appState) => {
     return {
         loading: appState.loadingUsers,
-        users: appState.users
+        users: appState.users,
+        loadingChapterUpdate: appState.loadingChapterUpdate
     }
 };
 

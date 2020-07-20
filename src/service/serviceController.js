@@ -4,12 +4,24 @@ export const loginResponseController = (text) => {
     return text.text().then(res => {
 
         if (!text.ok) {
-            if (text.status === 400) {
-                return Promise.reject(res);
+            if (text.status === 406) {
+                return Promise.reject("Email is invalid.");
+            }else if(text.status === 404) {
+                return Promise.reject("Email not found.");
+            }else if(text.status === 400) {
+                return Promise.reject("Password is incorrect.");
+            }else if(text.status === 401){
+                return Promise.reject("Access Denied.");
+            }else{
+                return Promise.reject("Login Service Error");
             }
-            return Promise.reject(res);
         }
-        return Promise.resolve(JSON.parse(res));
+        let data = JSON.parse(res);
+        if(data.user.userType !== 'admin'){
+            return Promise.reject("Access Denied.");
+        }else{
+            return Promise.resolve(data);
+        }
     });
 };
 
@@ -48,7 +60,7 @@ export const getChapterComposer = (text) => {
                 chapterName: o.chapterName,
                 chapterCost: o.chapterCost,
                 chapterDescription: o.chapterDescription,
-                chapterPreviewLink: "https://www.youtube.com/embed/" + o.chapterPreviewLink.split('=')[1],
+                chapterPreviewLink: "https://www.youtube.com/embed/" + o.chapterPreviewLink.split('.be/')[1],
                 lessons: composeLessons(o.lessons)
             };
             chapters.push(obj);
@@ -82,7 +94,7 @@ export const getUserComposer = (text) => {
         });
         return Promise.resolve(arr);
     });
-}
+};
 
 export const updateCreditComposer = (text) => {
     return text.text().then(res => {
@@ -94,4 +106,4 @@ export const updateCreditComposer = (text) => {
         }
         return Promise.resolve(JSON.parse(res));
     });
-}
+};

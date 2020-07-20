@@ -30,7 +30,7 @@ class Chapter extends React.Component {
     };
 
 
-    onEdit = (chapter) => {
+    onEdit = () => {
         this.setState({
             editDialogOpen: true
         })
@@ -40,9 +40,8 @@ class Chapter extends React.Component {
         this.setState({
             editDialogOpen: false
         });
-        console.log(this.state)
         return false;
-    }
+    };
 
 
 

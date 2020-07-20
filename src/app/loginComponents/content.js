@@ -1,7 +1,6 @@
 import React from 'react';
-import Header from "./header";
 import LoginPage from './loginPage';
-import useStyles from '../../css/useStyles'
+import useStyles from '../../css/loginStyle'
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/styles';
@@ -12,20 +11,12 @@ import HomePage from "../dashboardComponents/content";
 class Content extends React.Component {
 
     render() {
-        const {classes} = this.props;
-        if (!this.props.loggedIn) {
-            return (
-                <div style={{textAlign: 'center', height: '100%'}}>
-                    <Header/>
-                    <LoginPage componentStyle={classes.loginPageRoot}/>
-                </div>
-            )
-        } else {
-            return (
-                <HomePage/>
-            )
-        }
+        if (sessionStorage.getItem('logged') === "F" || sessionStorage.getItem('logged') == null) {
+            return <LoginPage/>
 
+        }else {
+            return <HomePage/>
+        }
     }
 }
 

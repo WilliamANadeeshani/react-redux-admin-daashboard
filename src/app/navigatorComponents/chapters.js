@@ -4,6 +4,8 @@ import Grid from "@material-ui/core/Grid";
 
 import {fetchChapters} from "../../store/actions/actionCreators";
 import Chapter from '../contentComponents/chapter';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Backdrop from "@material-ui/core/Backdrop";
 
 class Chapters extends React.Component {
 
@@ -29,7 +31,11 @@ class Chapters extends React.Component {
                 </Grid>
             )
         } else {
-            return <h1>Loading</h1>
+            return (
+                <Backdrop open={true} style={{zIndex: 1, color: '#fff'}}>
+                    <CircularProgress   color="inherit" />
+                </Backdrop>
+            )
         }
     };
 

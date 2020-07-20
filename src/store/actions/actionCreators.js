@@ -4,6 +4,9 @@ import {userService} from './../../service/userService'
 
 export const login = (email, password) => {
     return dispatch => {
+        dispatch({
+            type: actionTypes.LOGIN_BEGIN
+        });
         userService.loginService(email, password)
             .then(
                 email => {
@@ -56,6 +59,9 @@ export const fetchChapters = () => {
 
 export const fetchUsers = () => {
     return dispatch => {
+        dispatch({
+            type: actionTypes.USERS_FETCH_BEGIN
+        });
         userService.getUsers()
             .then(
                 data => {
@@ -66,16 +72,19 @@ export const fetchUsers = () => {
                 },
                 error => {
                     dispatch({
-                        type: actionTypes.CHAPTERS_FETCH_FAILURE,
+                        type: actionTypes.USERS_FETCH_FAILURE,
                         payload: error
                     })
                 }
             )
     }
-}
+};
 
 export const updateCredits = (user, amount) => {
     return dispatch => {
+        dispatch({
+            type: actionTypes.UPDATE_CREDIT_BEGIN
+        });
         userService.updateCredits(user, amount)
             .then(
                 data => {
@@ -92,4 +101,4 @@ export const updateCredits = (user, amount) => {
                 }
             )
     }
-}
+};
