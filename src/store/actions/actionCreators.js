@@ -16,10 +16,15 @@ export const login = (email, password) => {
                     });
                 },
                 error => {
+                    let err = error;
+                    if (typeof error === 'object') {
+                        err = "Service Error : " + error
+                    }
                     dispatch({
                         type: actionTypes.LOGIN_FAILURE,
-                        payload: error
+                        payload: err
                     })
+
                 }
             )
     }
