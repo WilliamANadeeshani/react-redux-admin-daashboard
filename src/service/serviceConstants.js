@@ -1,2 +1,2 @@
-export const SERVICE_ROOT = 'https://power-academy-test.herokuapp.com/api/';
+export const SERVICE_ROOT = 'https://sithumina-synergy-prod.herokuapp.com/api/';
 
