@@ -62,10 +62,10 @@ export default function SignInSide() {
 
     const [email, emailChangeHandler] = useState('');
     const [password, passwordChangeHandler] = useState('');
-    const [isSubmit, onSubmit] = useState(false);
 
     const loadingLogin = useSelector((state) => {return state.loadingLogin});
     const errorDetails = useSelector((state) => {return state.loginErrorDetail});
+    const isValidUser = useSelector((state) => {return state.isValidUser});
 
     const dispatch = useDispatch();
 
@@ -86,10 +86,7 @@ export default function SignInSide() {
                             {errorDetails.msg}
                         </Alert>
                     </div>
-                    <ValidatorForm onSubmit={() => onSubmit(() => {
-                        dispatch(login(email, password));
-                        return true;
-                    })} className={classes.form}>
+                    <ValidatorForm onSubmit={() => {dispatch(login(email, password))}} className={classes.form}>
                         <TextField
                             variant="outlined"
                             margin="normal"
@@ -122,7 +119,7 @@ export default function SignInSide() {
                             fullWidth
                             variant="contained"
                             className={classes.submit}
-                            disabled={isSubmit}
+                            disabled={isValidUser}
                         >
                             Sign In
                         </Button>
