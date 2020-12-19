@@ -4,7 +4,7 @@ import {
     getChapterComposer,
     getUserComposer,
     updateCreditComposer,
-    updateChapterComposer
+    updateChapterComposer, removeChapterComposer
 } from './serviceController';
 
 let loginService = (email, password) => {
@@ -97,11 +97,25 @@ let createChapter = (chapter) => {
         .then(data =>  data);
 };
 
+let removeChapter = (chapter) => {
+    const URL = SERVICE_ROOT + "chapters/delete/" + chapter._id;
+    const requestOptions = {
+        method: 'DELETE',
+        headers: {'Authorization': sessionStorage.getItem('token'), 'Content-Type': 'application/json'}
+    };
+
+    return fetch(URL, requestOptions)
+        .then(removeChapterComposer)
+        .then(data =>  data);
+};
+
+
 export const userService = {
     loginService,
     getChapters,
     getUsers,
     updateCredits,
     updateChapter,
-    createChapter
+    createChapter,
+    removeChapter
 };

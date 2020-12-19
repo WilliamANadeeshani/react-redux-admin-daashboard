@@ -110,7 +110,7 @@ const ChapterEditDialog =  (props) => {
                     {'.'}
                 </Typography>
             </main>
-                <Backdrop open={loadingChapterUpdate} style={{zIndex: 1, color: '#fff'}}>
+            <Backdrop open={loadingChapterUpdate} style={{zIndex: 1, color: '#fff'}}>
                 <CircularProgress color="inherit"/>
             </Backdrop>
         </React.Fragment>

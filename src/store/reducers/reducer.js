@@ -1,9 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 import {USERS} from './../../app/uiConstants';
 import _ from 'lodash';
-import {UPDATE_CHAPTER_BEGIN} from "../actions/actionTypes";
-import {UPDATE_CHAPTER_SUCCESS} from "../actions/actionTypes";
-import {UPDATE_CHAPTER_FAILURE} from "../actions/actionTypes";
+import {UPDATE_CHAPTER_BEGIN, UPDATE_CHAPTER_SUCCESS, UPDATE_CHAPTER_FAILURE, REMOVE_CHAPTER_BEGIN, REMOVE_CHAPTER_FAILURE, REMOVE_CHAPTER_SUCCESS} from "../actions/actionTypes";
 
 if(sessionStorage.getItem('logged') == null){
     sessionStorage.setItem('logged', 'F');
@@ -21,6 +19,8 @@ const initialState = {
     loadingCreditUpdate: false,
     loadingChapterUpdate: false,
     chapterUpdateResponse: {msgHeader: '', msgBody: ''},
+    loadingChapterRemove: false,
+    chapterRemoveResponse: {msgHeader: 'Are you sure you want to delete this chapter?'},
 };
 
 const reducer = (state = initialState, action) => {
@@ -134,6 +134,25 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loadingChapterUpdate: false,
                 chapterUpdateResponse: action.payload
+            };
+
+        //----- remove chapter -------------
+        case REMOVE_CHAPTER_BEGIN:
+            return{
+                ...state,
+                loadingChapterRemove: true
+            };
+        case REMOVE_CHAPTER_SUCCESS:
+            return{
+                ...state,
+                loadingChapterRemove: false,
+                chapterRemoveResponse: action.payload
+            };
+        case REMOVE_CHAPTER_FAILURE:
+            return{
+                ...state,
+                loadingChapterRemove: false,
+                chapterRemoveResponse: action.payload
             };
 
         default:

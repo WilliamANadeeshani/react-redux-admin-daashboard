@@ -117,7 +117,7 @@ export const updateChapter = (chapter, setActiveStep) => {
                 data => {
                     dispatch({
                         type: actionTypes.UPDATE_CHAPTER_SUCCESS,
-                        payload: {msgHeader: 'Thank you.', msgBody: 'Your chapter details are updated successfully.'}
+                        payload: {msgHeader: 'Thank you.', msgBody: 'Your chapter details are updated successfully.', data: data}
                     });
                     setActiveStep(3);
                 },
@@ -142,7 +142,7 @@ export const createChapter = (chapter, setActiveStep) => {
                 data => {
                     dispatch({
                         type: actionTypes.UPDATE_CHAPTER_SUCCESS,
-                        payload: {msgHeader: 'Thank you.', msgBody: 'Your chapter details are updated successfully.'}
+                        payload: {msgHeader: 'Thank you.', msgBody: 'Your chapter details are updated successfully.', data: data}
                     });
                     setActiveStep(3);
                 },
@@ -152,6 +152,29 @@ export const createChapter = (chapter, setActiveStep) => {
                         payload: {msgHeader: 'Sorry.', msgBody: error}
                     });
                     setActiveStep(3);
+                }
+            )
+    }
+};
+
+export const removeChapter = (chapter) => {
+    return dispatch => {
+        dispatch({
+            type: actionTypes.REMOVE_CHAPTER_BEGIN
+        });
+        userService.removeChapter(chapter)
+            .then(
+                data => {
+                    dispatch({
+                        type: actionTypes.REMOVE_CHAPTER_SUCCESS,
+                        payload: {msgHeader: 'Successfully remove the chapter.', data: data}
+                    });
+                },
+                error => {
+                    dispatch({
+                        type: actionTypes.REMOVE_CHAPTER_FAILURE,
+                        payload: {msgHeader: 'Sorry: '+ error}
+                    });
                 }
             )
     }
