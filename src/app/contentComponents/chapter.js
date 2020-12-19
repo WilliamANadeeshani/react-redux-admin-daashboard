@@ -120,7 +120,7 @@ class Chapter extends React.Component {
                             </Typography>
                         </Toolbar>
                     </AppBar>
-                    <DialogContent style={{backgroundColor: '#eaeff1'}}>
+                    <DialogContent style={{backgroundColor: '#303030'}}>
                         <ChapterEditDialog chapter={this.state.chapter} type={'edit'}/>
                     </DialogContent>
                 </Dialog>
