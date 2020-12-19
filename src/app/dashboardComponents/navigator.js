@@ -2,19 +2,9 @@ import React from 'react';
 import * as PropTypes from "prop-types";
 import {connect} from "react-redux";
 import _ from "lodash";
-
-import Drawer from "@material-ui/core/Drawer";
-import withStyles from "@material-ui/core/styles/withStyles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
-import PeopleIcon from '@material-ui/icons/People';
-import DnsRoundedIcon from '@material-ui/icons/DnsRounded';
-import PermMediaOutlinedIcon from '@material-ui/icons/PhotoSizeSelectActual';
-import SettingsIcon from '@material-ui/icons/Settings';
 import clsx from 'clsx';
+import {Drawer, withStyles, List, ListItem, ListItemIcon, ListItemText, Divider, } from "@material-ui/core";
+import {People, DnsRounded, PermMediaOutlined, Settings} from '@material-ui/icons';
 
 import {styles} from './../../css/navigatorStyle';
 import {change_tab} from "../../store/actions/actionCreators";
@@ -23,15 +13,15 @@ const categories = [
     {
         id: 'Overview',
         children: [
-            { id: 'Users', icon: <PeopleIcon/>, active: false},
-            { id: 'Chapters', icon: <DnsRoundedIcon />, active: false },
-            { id: 'Income', icon: <PermMediaOutlinedIcon />, active: false}
+            { id: 'Users', icon: <People/>, active: false},
+            { id: 'Chapters', icon: <DnsRounded />, active: false },
+            { id: 'Income', icon: <PermMediaOutlined />, active: false}
         ],
     },
     {
         id: 'About',
         children: [
-            { id: 'Contact', icon: <SettingsIcon /> }
+            { id: 'Contact', icon: <Settings /> }
         ],
     },
 ];

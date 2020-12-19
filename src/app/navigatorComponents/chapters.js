@@ -1,11 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Grid from "@material-ui/core/Grid";
+import {Grid, Backdrop, CircularProgress} from "@material-ui/core";
 
 import {fetchChapters} from "../../store/actions/actionCreators";
 import Chapter from '../contentComponents/chapter';
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Backdrop from "@material-ui/core/Backdrop";
 
 class Chapters extends React.Component {
 
@@ -19,7 +17,7 @@ class Chapters extends React.Component {
                 <Grid container spacing={3} >
                     {chapterList.map(chapter => {
                         return (
-                            <React.Fragment key={chapter.id}>
+                            <React.Fragment key={chapter._id}>
                                 <Grid item xs={3}>
                                     <Chapter
                                         chapter={chapter}

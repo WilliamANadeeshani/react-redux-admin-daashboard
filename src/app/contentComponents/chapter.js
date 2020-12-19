@@ -1,31 +1,29 @@
 import React from 'react';
 import {connect} from "react-redux";
 import * as PropTypes from "prop-types";
-import {styles} from '../../css/chapterStyle';
-
-import withStyles from "@material-ui/core/styles/withStyles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardActions from "@material-ui/core/CardActions";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
-import AppBar from "@material-ui/core/AppBar";
-import IconButton from "@material-ui/core/IconButton";
+import {withStyles, Card, CardActionArea, CardContent, Typography, Button, CardActions, Dialog, DialogContent, AppBar, IconButton, Toolbar} from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
-import Toolbar from "@material-ui/core/Toolbar";
+
+import {styles} from '../../css/chapterStyle';
+import ChapterEditDialog from "./chapterEditDialog";
+import {fetchChapters} from "../../store/actions/actionCreators";
+
 
 class Chapter extends React.Component {
 
     constructor(props) {
         super(props);
+        const {chapter} = this.props;
         this.state = {
-            editDialogOpen: false
+            editDialogOpen: false,
+            chapter: {
+                _id: chapter._id,
+                chapterNumber: chapter.chapterNumber,
+                chapterName: chapter.chapterName,
+                chapterCost: chapter.chapterCost,
+                chapterDescription: chapter.chapterDescription,
+                lessons: chapter.lessons
+            }
         }
     };
 
@@ -37,13 +35,12 @@ class Chapter extends React.Component {
     };
 
     handleEditDialogClose = () => {
+        this.props.fetchChapters();
         this.setState({
             editDialogOpen: false
         });
         return false;
     };
-
-
 
     render() {
         const {classes, chapter} = this.props;
@@ -52,12 +49,6 @@ class Chapter extends React.Component {
             <React.Fragment>
                 <Card className={classes.root}>
                     <CardActionArea>
-                        <CardMedia
-                            component="iframe"
-                            height="140"
-                            src={chapter.chapterPreviewLink}
-                            title={chapter.chapterName}
-                        />
                         <CardContent>
 
                             <Typography gutterBottom variant="h5" component="h2">
@@ -89,23 +80,12 @@ class Chapter extends React.Component {
                                 <CloseIcon />
                             </IconButton>
                             <Typography variant="h6" className={classes.title}>
-                                Chapter Details
+                                Chapter Details Edit
                             </Typography>
-                            <Button autoFocus color="inherit" onClick={this.handleEditDialogClose}>
-                                Save Changes
-                            </Button>
                         </Toolbar>
                     </AppBar>
-                    <DialogTitle id="form-dialog-title">Edit Chapter Details</DialogTitle>
-                    <DialogContent>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Email Address"
-                            type="email"
-                            fullWidth
-                        />
+                    <DialogContent style={{backgroundColor: '#eaeff1'}}>
+                        <ChapterEditDialog chapter={this.state.chapter}/>
                     </DialogContent>
                 </Dialog>
             </React.Fragment>
@@ -119,7 +99,9 @@ const mapStateToProps = (appState) => {
     }
 };
 
-const matchDispatchToProps = {};
+const matchDispatchToProps = {
+    fetchChapters: fetchChapters
+};
 
 Chapter.propTypes = {
     classes: PropTypes.object.isRequired,

@@ -1,7 +1,6 @@
 import * as actionTypes from './actionTypes';
 import {userService} from './../../service/userService'
 
-
 export const login = (email, password) => {
     return dispatch => {
         dispatch({
@@ -103,6 +102,31 @@ export const updateCredits = (user, amount) => {
                         type: actionTypes.UPDATE_CREDIT_FAILURE,
                         payload: error
                     })
+                }
+            )
+    }
+};
+
+export const updateChapter = (chapter, setActiveStep) => {
+    return dispatch => {
+        dispatch({
+            type: actionTypes.UPDATE_CHAPTER_BEGIN
+        });
+        userService.updateChapter(chapter)
+            .then(
+                data => {
+                    dispatch({
+                        type: actionTypes.UPDATE_CHAPTER_SUCCESS,
+                        payload: {msgHeader: 'Thank you.', msgBody: 'Your chapter details are updated successfully.'}
+                    });
+                    setActiveStep(3);
+                },
+                error => {
+                    dispatch({
+                        type: actionTypes.UPDATE_CHAPTER_FAILURE,
+                        payload: {msgHeader: 'Sorry.', msgBody: error}
+                    });
+                    setActiveStep(3);
                 }
             )
     }

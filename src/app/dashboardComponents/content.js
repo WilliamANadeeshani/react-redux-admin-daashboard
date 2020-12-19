@@ -1,11 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
-
-import {ThemeProvider, withStyles} from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
+import {ThemeProvider, withStyles, CssBaseline, Typography, Link, } from '@material-ui/core';
 
 import {theme, styles, drawerWidth} from '../../css/homeStyle';
 import Header from './header';

@@ -1,17 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
 import * as PropTypes from "prop-types";
-import withStyles from "@material-ui/core/styles/withStyles";
+import {AppBar, Toolbar, Grid, IconButton, Link, Typography, Avatar, withStyles} from "@material-ui/core";
+
 import {styles} from './../../css/headerStyle';
-
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
-
 
 class Header extends React.Component {
 
