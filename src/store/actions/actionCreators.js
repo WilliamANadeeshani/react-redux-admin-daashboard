@@ -131,3 +131,28 @@ export const updateChapter = (chapter, setActiveStep) => {
             )
     }
 };
+
+export const createChapter = (chapter, setActiveStep) => {
+    return dispatch => {
+        dispatch({
+            type: actionTypes.UPDATE_CHAPTER_BEGIN
+        });
+        userService.createChapter(chapter)
+            .then(
+                data => {
+                    dispatch({
+                        type: actionTypes.UPDATE_CHAPTER_SUCCESS,
+                        payload: {msgHeader: 'Thank you.', msgBody: 'Your chapter details are updated successfully.'}
+                    });
+                    setActiveStep(3);
+                },
+                error => {
+                    dispatch({
+                        type: actionTypes.UPDATE_CHAPTER_FAILURE,
+                        payload: {msgHeader: 'Sorry.', msgBody: error}
+                    });
+                    setActiveStep(3);
+                }
+            )
+    }
+};

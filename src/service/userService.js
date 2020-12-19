@@ -84,10 +84,24 @@ let updateChapter = (chapter) => {
         .then(data =>  data);
 };
 
+let createChapter = (chapter) => {
+    const URL = SERVICE_ROOT + "chapters/create";
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Authorization': sessionStorage.getItem('token'), 'Content-Type': 'application/json'},
+        body: JSON.stringify(chapter)
+    };
+
+    return fetch(URL, requestOptions)
+        .then(updateChapterComposer)
+        .then(data =>  data);
+};
+
 export const userService = {
     loginService,
     getChapters,
     getUsers,
     updateCredits,
-    updateChapter
+    updateChapter,
+    createChapter
 };

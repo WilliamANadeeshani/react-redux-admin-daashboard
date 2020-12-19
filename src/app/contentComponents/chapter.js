@@ -85,7 +85,7 @@ class Chapter extends React.Component {
                         </Toolbar>
                     </AppBar>
                     <DialogContent style={{backgroundColor: '#eaeff1'}}>
-                        <ChapterEditDialog chapter={this.state.chapter}/>
+                        <ChapterEditDialog chapter={this.state.chapter} type={'edit'}/>
                     </DialogContent>
                 </Dialog>
             </React.Fragment>

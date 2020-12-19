@@ -5,7 +5,7 @@ import { CssBaseline, Paper, Stepper, Step, Button, Link, Typography, StepLabel,
 import DetailForm from './chapterForm';
 import ReviewForm from './reviewForm';
 import LessonForm from "./lessonForm";
-import {updateChapter} from "../../store/actions/actionCreators";
+import {createChapter, updateChapter} from "../../store/actions/actionCreators";
 import useStyles from "../../css/chapterEditDialogStyle";
 
 const ChapterEditDialog =  (props) => {
@@ -28,7 +28,7 @@ const ChapterEditDialog =  (props) => {
 
     const handleNext = () => {
         if(activeStep === steps.length - 1){
-            dispatch(updateChapter(chapter, setActiveStep));
+            props.type === 'edit' ? dispatch(updateChapter(chapter, setActiveStep)) : dispatch(createChapter(chapter, setActiveStep));
         }else{
             setActiveStep(activeStep + 1);
         }
